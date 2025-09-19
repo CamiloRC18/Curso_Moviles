@@ -51,8 +51,72 @@ Debes estar en el directorio del proyecto
 
 ![alt text](image-1.png)
 
+
+# Acualizacion del taller 2
+
+## Arquitectura / Navegación
+Rutas definidas (go_router):
+- `/` -> Home (lib/views/home/home_page.dart)
+- `/dashboard` -> Dashboard (lib/views/Dashboard/dashboard_page.dart)
+- `/paso_parametros` -> Pantalla para enviar parámetros (lib/views/paso_parametros/paso_parametro_screen.dart)
+- `/detalle/:parametro/:metodo` -> Detalle que recibe parámetros por ruta (lib/views/paso_parametros/detalle_screen.dart)
+- `/ciclo_vida` -> Pantalla para demostrar ciclo de vida (lib/views/ciclo_vida/ciclo_vida_screen.dart)
+
+Cómo se pasan parámetros:
+- Parámetros de detalle se pasan como path parameters en la ruta `/detalle/:parametro/:metodo`.
+  - Ejemplo: context.go('/detalle/miValor/go')
+  - En DetalleScreen se recupera con state.pathParameters['parametro'] y ['metodo'] en el router.
+- Métodos de navegación usados:
+  - context.go(path) — reemplaza la ruta actual (no se puede volver con back).
+  - context.push(path) — apila la nueva ruta (se puede volver con back).
+  - context.replace(path) — reemplaza la ruta actual en la pila.
+
+Nota: appRouter se declara en lib/routes/app_router.dart y se pasa a MaterialApp.router en main.dart.
+
+## Widgets usados y por qué
+- MaterialApp.router / GoRouter
+  - Manejo centralizado de rutas y parámetros; permite usar context.go/push/replace.
+- Scaffold, AppBar
+  - Estructura básica de cada pantalla; AppBarTheme centralizado en lib/themes/app_theme.dart para estilo uniforme.
+- Drawer (CustomDrawer)
+  - Navegación lateral con opciones reutilizables en todo el app.
+- Image.network / Image.asset, Row, Container, Divider
+  - Mostrar imágenes (remota y local) y estructura en banner + separación visual.
+- Text, TextStyle
+  - Mostrar datos estáticos (nombre) y personalizar tipografía del botón y títulos.
+- ElevatedButton, OutlinedButton, TextButton, ElevatedButton.icon
+  - Diferentes acciones con estilos semánticos: acción principal, secundaria y opciones.
+- SnackBar
+  - Retroalimentación inmediata al usuario (ej. "Título actualizado").
+- ListView / ListTile
+  - Listas desplazables para menús y listas de ítems (ej. tareas pendientes).
+- GridView
+  - Mostrar una rejilla de elementos en el dashboard.
+- DefaultTabController / TabBar / TabBarView
+  - Secciones dentro de una misma pantalla (Dashboard) para organizar Grid/List/Overlay.
+- Stack
+  - Superponer texto/controles sobre una imagen (overlay).
+- Dismissible
+  - Interacción para marcar tareas como completadas con gesto de swipe.
+- Modal Bottom Sheet (showModalBottomSheet)
+  - Mostrar detalles rápidos de un elemento sin cambiar de pantalla.
+
+## Archivos clave / Ubicación
+- main.dart — configura MaterialApp.router y routerConfig
+  - filepath: lib/main.dart
+- app_router.dart — definición de rutas y errorBuilder
+  - filepath: lib/routes/app_router.dart
+- Tema centralizado
+  - filepath: lib/themes/app_theme.dart
+- Vistas principales
+  - Home: lib/views/home/home_page.dart
+  - Dashboard: lib/views/Dashboard/dashboard_page.dart
+  - Paso parámetros: lib/views/paso_parametros/paso_parametro_screen.dart
+  - Detalle: lib/views/paso_parametros/detalle_screen.dart
+  - Ciclo de vida: lib/views/ciclo_vida/ciclo_vida_screen.dart
+- Drawer personalizado
+  - filepath: lib/widgets/custom_drawer.dart
+
 # 👤 Datos del Estudiante
-
-
 - Camilo Rios Cardona
 - Codigo: 230221047
