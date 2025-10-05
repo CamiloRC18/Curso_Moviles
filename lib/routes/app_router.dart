@@ -4,6 +4,8 @@ import '../views/Dashboard/dashboard_page.dart';
 import '../views/paso_parametros/paso_parametro_screen.dart';
 import '../views/paso_parametros/detalle_screen.dart';
 import '../views/ciclo_vida/ciclo_vida_screen.dart';
+import '../views/Cronometro/cronometro_page.dart';
+import '../views/Asincronia/Asincronia_page.dart';
 
 final GoRouter appRouter = GoRouter(
   debugLogDiagnostics: true,
@@ -20,6 +22,11 @@ final GoRouter appRouter = GoRouter(
       path: '/paso_parametros',
       builder: (context, state) => const PasoParametrosScreen(),
     ),
+    GoRoute(
+      path: '/cronometro',
+      builder: (context, state) => const CronometroPage(),
+    ),
+    GoRoute(path: '/asincronia', builder: (c, s) => const AsincroniaPage()),
     GoRoute(
       path: '/detalle/:parametro/:metodo',
       builder: (context, state) {
