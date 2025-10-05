@@ -117,6 +117,47 @@ Nota: appRouter se declara en lib/routes/app_router.dart y se pasa a MaterialApp
 - Drawer personalizado
   - filepath: lib/widgets/custom_drawer.dart
 
+## Actualizacion del taller 3
+
+## Asincronía / Timer / Isolate (nuevas implementaciones)
+
+### 1 Asincronía con Future / async / await
+- Qué se hizo:
+  - Servicio simulado que "consulta" datos usando `Future.delayed(Duration(seconds: 2))`.
+  - Uso de `async/await` en la UI para esperar el resultado sin bloquear el hilo principal.
+  - Estados en UI: `Cargando…`, `Éxito`, `Error`.
+  - Prints en consola para mostrar el orden de ejecución: "antes", "durante" y "después".
+- Archivo:
+  - lib/views/asincronia/asincronia_page.dart
+- Cómo probar:
+  - Abrir la pantalla "Asincronía" desde el Drawer o `context.go('/asincronia')`.
+  - Pulsar "Cargar datos" y observar la UI y la consola (prints).
+
+### 2 Timer (Cronómetro)
+- Qué se hizo:
+  - Cronómetro con botones: Iniciar / Pausar / Reanudar / Reiniciar.
+  - Actualiza la pantalla cada 100 ms (configurable a 1000 ms si se desea 1 s).
+  - Cancela el `Timer` en `dispose()` y al pausar (limpieza de recursos).
+  - Tiempo mostrado en un `Text` grande con formato mm:ss.cs.
+- Archivo:
+  - lib/views/Cronometro/cronometro_page.dart
+- Cómo probar:
+  - Abrir "Cronómetro" desde el Drawer o `context.go('/cronometro')`.
+  - Usar los botones para iniciar/pausar/reanudar/reiniciar y verificar que el Timer se detiene al salir.
+
+### 3 Isolate para tarea pesada (CPU-bound)
+- Qué se hizo:
+  - Implementación de una función CPU-bound (suma de una secuencia grande).
+  - Ejecución en un `Isolate` usando `Isolate.spawn`.
+  - Comunicación entre isolate y UI por `SendPort` / `ReceivePort`.
+  - Resultado enviado desde el isolate mostrado en la UI al terminar.
+- Archivo:
+  - lib/views/asincronia/asincronia_page.dart (sección Isolate)
+- Cómo probar:
+  - En la pantalla de Asincronía, ingresar un número grande (p. ej. 5_000_000) y ejecutar.
+  - Ver el indicador de ejecución y el resultado cuando llegue; revisar también la consola.
+
+
 # 👤 Datos del Estudiante
 - Camilo Rios Cardona
 - Codigo: 230221047
