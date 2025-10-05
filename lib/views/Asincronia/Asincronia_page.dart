@@ -129,6 +129,17 @@ class _AsincroniaPageState extends State<AsincroniaPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // Título para la sección de Asincronía
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6.0),
+              child: Text(
+                'Asincronía',
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(14),
@@ -177,6 +188,17 @@ class _AsincroniaPageState extends State<AsincroniaPage> {
             ),
 
             const SizedBox(height: 16),
+
+            // Título para la sección de Isolate
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6.0),
+              child: Text(
+                'Isolate (tarea pesada)',
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
 
             Card(
               child: Padding(
