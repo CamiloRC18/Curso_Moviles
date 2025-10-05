@@ -28,14 +28,6 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Configuración'),
-            onTap: () {
-              context.push('/settings');
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.person),
             title: const Text('Dashboard'),
             onTap: () {
@@ -56,6 +48,22 @@ class CustomDrawer extends StatelessWidget {
             title: const Text('Ciclo de Vida'),
             onTap: () {
               context.go('/ciclo_vida');
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.access_time),
+            title: const Text('Cronometro'),
+            onTap: () {
+              context.push('/cronometro');
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.sync_alt),
+            title: const Text('Asincronía '),
+            onTap: () {
+              context.go('/asincronia');
               Navigator.pop(context);
             },
           ),
