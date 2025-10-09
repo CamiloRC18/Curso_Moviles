@@ -67,6 +67,14 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.restaurant),
+            title: const Text('comida'),
+            onTap: () {
+              context.go('/comidas');
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );
