@@ -5,9 +5,12 @@ import '../views/paso_parametros/paso_parametro_screen.dart';
 import '../views/paso_parametros/detalle_screen.dart';
 import '../views/ciclo_vida/ciclo_vida_screen.dart';
 import '../views/Cronometro/cronometro_page.dart';
-import '../views/Asincronia/Asincronia_page.dart';
+import '../views/asincronia/asincronia_page.dart';
+import '../views/comida/comida_detail.dart';
+import '../views/comida/comida_list.dart';
 
 final GoRouter appRouter = GoRouter(
+  initialLocation: '/comidas',
   debugLogDiagnostics: true,
   routes: [
     GoRoute(
@@ -39,9 +42,17 @@ final GoRouter appRouter = GoRouter(
       path: '/ciclo_vida',
       builder: (context, state) => const CicloVidaScreen(),
     ),
+    GoRoute(
+      path: '/comidas',
+      builder: (context, state) => const ComidaListView(),
+    ),
+    GoRoute(
+      path: '/comida/:id',
+      builder: (context, state) {
+        final id = state.pathParameters['id'] ?? '';
+        return ComidaDetailView(id: id);
+      },
+    ),
   ],
-  errorBuilder: (context, state) {
-    // evita excepción si no se encuentra ruta; redirige a Home visualmente
-    return const MyHomePage(title: 'Inicio');
-  },
+  errorBuilder: (context, state) => const MyHomePage(title: 'Inicio'),
 );

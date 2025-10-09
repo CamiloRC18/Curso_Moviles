@@ -158,6 +158,88 @@ Nota: appRouter se declara en lib/routes/app_router.dart y se pasa a MaterialApp
   - Ver el indicador de ejecución y el resultado cuando llegue; revisar también la consola.
 
 
+## API usada (breve descripción)
+
+- API principal: TheMealDB (categorías de comidas).
+- Endpoint usado: `https://www.themealdb.com/api/json/v1/1/categories.php`
+- Uso: obtener lista de categorías y detalles (se consumió desde `ComidaService` en `lib/services/comida.services.dart`).  
+- Nota: la URL base también puede configurarse desde el archivo `.env` con la clave `COMIDA_URL_API`.
+
+Ejemplo de respuesta JSON (resumen, un item de `categories`):
+
+```json
+{
+  "categories": [
+    {
+      "idCategory": "1",
+      "strCategory": "Beef",
+      "strCategoryThumb": "https://www.themealdb.com/images/category/beef.png",
+      "strCategoryDescription": "Beef is the culinary name for meat from cattle..."
+    }
+    // ...
+  ]
+}
+```
+
+---
+
+## Arquitectura (carpetas principales)
+
+- lib/models/          — modelos de datos (p. ej. `comida` en `lib/models/comida.dart`)
+- lib/services/        — servicios para llamadas HTTP (p. ej. `comida.services.dart`)
+- lib/views/           — pantallas / vistas (Home, Dashboard, Cronometro, Asincronía, Comida, etc.)
+  - lib/views/comida/        — lista y detalle de categorías
+  - lib/views/Cronometro/    — cronometro
+  - lib/views/asincronia/    — Future / Isolate demo
+- lib/widgets/          — widgets reutilizables (p. ej. `custom_drawer.dart`, `base_view.dart`)
+- lib/routes/           — definición de rutas (app_router.dart)
+- lib/themes/           — temas y estilos (app_theme.dart)
+- .env                  — variables de entorno (opcionales, p. ej. `COMIDA_URL_API`)
+
+---
+
+## Rutas definidas (go_router) y parámetros
+
+- `/`  
+  - Home (lib/views/home/home_page.dart)
+
+- `/dashboard`  
+  - Dashboard (lib/views/Dashboard/dashboard_page.dart)
+
+- `/paso_parametros`  
+  - Pantalla para enviar parámetros (lib/views/paso_parametros/paso_parametro_screen.dart)
+
+- `/detalle/:parametro/:metodo`  
+  - Detalle que recibe path parameters `parametro` y `metodo` (lib/views/paso_parametros/detalle_screen.dart)  
+  - Ejemplo: `context.go('/detalle/valor/go')` — se recupera en el builder con `state.pathParameters['parametro']` y `['metodo']`.
+
+- `/ciclo_vida`  
+  - Demostración ciclo de vida (lib/views/ciclo_vida/ciclo_vida_screen.dart)
+
+- `/cronometro`  
+  - Cronómetro (lib/views/Cronometro/cronometro_page.dart)
+
+- `/asincronia`  
+  - Demo Asincronía + Isolate (lib/views/asincronia/asincronia_page.dart)
+
+- `/comidas`  
+  - Lista de categorías (lib/views/comida/comida_list.dart)
+
+- `/comida/:id`  
+  - Detalle de categoría por id (lib/views/comida/comida_detail.dart)  
+  - Ejemplo de navegación: `context.push('/comida/1')` o desde la lista `context.push('/comida/${c.id}')`.
+
+- (Opcional/si existe en tu proyecto) `/pokemons` y `/pokemon/:name`  
+  - Lista y detalle de Pokémon (si se agregaron los archivos en `lib/views/pokemon/`).
+
+Cómo se envían parámetros:
+- Path parameters: se incluyen directamente en la ruta definida (`/item/:id`) y se leen desde `state.pathParameters['id']` en el builder.
+- Para navegar desde UI:
+  - `context.push('/ruta')` — apila la nueva ruta (se puede volver con back).
+  - `context.go('/ruta')` — reemplaza la ruta actual (no deja historial de regreso).
+  - `context.replace('/ruta')` — reemplaza la ruta actual en la pila.
+
+
 # 👤 Datos del Estudiante
 - Camilo Rios Cardona
 - Codigo: 230221047
